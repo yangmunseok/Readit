@@ -35,7 +35,7 @@ export const RankPage = () => {
 
   return (
     <div className="relative text-white font-pretendard overflow-x-hidden">
-      <header className="flex flex-col w-full justify-evenly bg-black/60 bg-[url(img/Background2.jpg)] bg-blend-multiply bg-cover bg-center">
+      <header className="flex flex-col w-full justify-evenly bg-black/60 bg-[url(/img/Background2.jpg)] bg-blend-multiply bg-cover bg-center">
         <nav className="px-2 w-full h-8 lg:h-12 bg-black/10  border-b border-b-white/10">
           <div className="w-full max-w-7xl h-full flex justify-between items-center p-2 mx-auto">
             <p className="font-bold font-sans text-xl lg:text-2xl">Readit</p>
