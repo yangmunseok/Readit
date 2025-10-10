@@ -135,8 +135,8 @@ export const HomePage = () => {
           <div className="flex w-full justify-between font-bold mb-10">
             <p className="text-2xl">
               {recommendList.length > 0
-                ? `${user.nickname}님, 최근 책 위치 조회 기록을 바탕으로 좋아하실 만한 책을 추천해 드립니다.`
-                : `${user.nickname}님, 책의 도서관 위치를 조회하고 맞춤 추천 도서를 바로 만나보세요!`}
+                ? `${user.nickname}님, 최근 책 조회 기록을 바탕으로 좋아하실 만한 책을 추천해 드립니다.`
+                : `${user.nickname}님, 책의 정보를 조회하고 맞춤 추천 도서를 바로 만나보세요!`}
             </p>
           </div>
           {recommendList.length > 0 && (

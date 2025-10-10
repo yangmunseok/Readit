@@ -105,6 +105,19 @@ export const searchBookByIsbnNaver = async (req, res) => {
     const json = await xml2js.parseStringPromise(xml, { explicitArray: false });
     const item = json.rss.channel.item;
     res.status(200).json(item);
+
+    const curUser = await User.findOne({ where: { id: req.user.id } });
+    let updatedSearchHistory = [...(curUser.searchHistory || []), isbn];
+
+    // Remove duplicated data
+    updatedSearchHistory = [...new Set(updatedSearchHistory)];
+
+    if (updatedSearchHistory.length > 5) {
+      updatedSearchHistory = updatedSearchHistory.slice(-5);
+    }
+    curUser.update({
+      searchHistory: updatedSearchHistory,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -129,18 +142,6 @@ export const searchLibraryByIsbn = async (req, res) => {
     const json = await searchResult.json();
     const data = json.response;
     res.status(200).json(data);
-
-    const curUser = await User.findOne({ where: { id: req.user.id } });
-    let updatedSearchHistory = [
-      ...(curUser.searchHistory || []),
-      req.query.isbn,
-    ];
-    if (updatedSearchHistory.length > 5) {
-      updatedSearchHistory = updatedSearchHistory.slice(-5);
-    }
-    await curUser.update({
-      searchHistory: updatedSearchHistory,
-    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Internal Server Error" });

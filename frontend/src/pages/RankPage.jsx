@@ -98,7 +98,7 @@ export const RankPage = () => {
         <div className="grid grid-cols-3 lg:grid-cols-5 w-full gap-5 mt-10">
           {books.data &&
             books.data.map((book) => (
-              <Link to={`/reviews/${book.isbn13}`}>
+              <article>
                 <img
                   src={book.bookImageURL}
                   className="w-full aspect-2/3 border-2 border-stone-200"
@@ -114,7 +114,7 @@ export const RankPage = () => {
                     <span className="font-bold text-lg"> {book.vol}권</span>
                   )}
                 </div>
-              </Link>
+              </article>
             ))}
         </div>
       </div>
