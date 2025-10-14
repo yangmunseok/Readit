@@ -1,8 +1,9 @@
 import LocalStrategy from "passport-local";
 import passport from "passport";
 import bcrypt from "bcrypt";
-import User from "../models/user.model.js";
-import Review from "../models/review.model.js";
+import { db } from "../config/db.js";
+
+const { User, Review } = db.models;
 
 export default () => {
   passport.use(

@@ -1,6 +1,7 @@
-import User from "../models/user.model.js";
 import { Op } from "sequelize";
+import { db } from "../config/db.js";
 
+const { User } = db.models;
 const retentionPeriod = 60 * 1000 * 60 * 24 * 7; // 7days
 export const cleanupInterval = 60 * 1000 * 60 * 24 * 7; // 7days
 

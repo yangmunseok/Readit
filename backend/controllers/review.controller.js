@@ -1,6 +1,6 @@
-import Review from "../models/review.model.js";
-import User from "../models/user.model.js";
-import ReviewLiker from "../models/reviewLiker.model.js";
+import { db } from "../config/db.js";
+
+const { Review, User, ReviewLiker } = db.models;
 
 export const postReview = async (req, res) => {
   try {

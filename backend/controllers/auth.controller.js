@@ -1,7 +1,9 @@
-import User from "../models/user.model.js";
 import passport from "passport";
 import bcrypt from "bcrypt";
 import { Op } from "sequelize";
+import { db } from "../config/db.js";
+
+const { User } = db.models;
 
 export const signUp = async (req, res, next) => {
   const { email, password, nickname } = req.body;
@@ -44,7 +46,7 @@ export const login = (req, res, next) => {
       return res.status(401).send({ error: info.message });
     }
 
-    req.logIn(user, (loginError) => {
+    req.login(user, (loginError) => {
       if (loginError) {
         console.error(loginError);
         return next(loginError);

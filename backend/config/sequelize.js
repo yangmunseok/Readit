@@ -1,24 +1,23 @@
 import { Sequelize } from "sequelize";
-import { configDotenv } from "dotenv";
+import { ENV_VARS } from "./envVars.js";
 
-configDotenv();
 let sequelize;
 
 try {
-  const env = process.env.NODE_ENV || "development";
+  const env = ENV_VARS.NODE_ENV || "development";
   switch (env) {
     case "development":
-      sequelize = new Sequelize(process.env.DB_DEV_URL, {
+      sequelize = new Sequelize(ENV_VARS.DB_DEV_URL, {
         underscored: true,
       });
       break;
     case "production":
-      sequelize = new Sequelize(process.env.DB_PROD_URL, {
+      sequelize = new Sequelize(ENV_VARS.DB_PROD_URL, {
         underscored: true,
       });
       break;
     case "test":
-      sequelize = new Sequelize(process.env.DB_TEST_URL, {
+      sequelize = new Sequelize(ENV_VARS.DB_TEST_URL, {
         underscored: true,
       });
   }

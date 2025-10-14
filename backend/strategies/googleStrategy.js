@@ -1,17 +1,20 @@
 import GoogleStrategy from "passport-google-oauth20";
 import passport from "passport";
-import User from "../models/user.model.js";
-import Review from "../models/review.model.js";
+import { ENV_VARS } from "../config/envVars.js";
+import { db } from "../config/db.js";
+
+const { User, Review } = db.models;
 
 export default () => {
   passport.use(
     new GoogleStrategy(
       {
-        clientID: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        clientID: ENV_VARS.GOOGLE_CLIENT_ID,
+        clientSecret: ENV_VARS.GOOGLE_CLIENT_SECRET,
         callbackURL: "/api/auth/google/callback",
         scope: ["profile", "email"],
         state: true,
+        proxy: true,
       },
       async (accessToken, refreshToken, profile, done) => {
         // Find or create user in your database

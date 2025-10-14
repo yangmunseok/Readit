@@ -1,15 +1,18 @@
 import { request } from "express";
-import User from "../models/user.model.js";
 import xml2js from "xml2js";
+import { ENV_VARS } from "../config/envVars.js";
+import { db } from "../config/db.js";
 
-const key = process.env.LIBRARY_BIGDATA_API_KEY;
+const { User } = db.models;
+
+const key = ENV_VARS.LIBRARY_BIGDATA_API_KEY;
 
 const NAVER_SEARCH_API_URL = "https://openapi.naver.com/v1/search/book.json";
 const NAVER_DTL_SEARCH_API_URL =
   "https://openapi.naver.com/v1/search/book_adv.xml";
 const NAVER_CLIENT = {
-  id: process.env.NAVER_API_CLIENT_ID,
-  password: process.env.NAVER_API_CLIENT_PWD,
+  id: ENV_VARS.NAVER_API_CLIENT_ID,
+  password: ENV_VARS.NAVER_API_CLIENT_PWD,
 };
 
 export const searchBooksFromNaver = async (req, res) => {

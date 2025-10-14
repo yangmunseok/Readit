@@ -9,11 +9,10 @@ import {
   signout,
   signUp,
 } from "../controllers/auth.controller.js";
+import { ENV_VARS } from "../config/envVars.js";
 const router = express.Router();
 const redirectURL =
-  process.env.NODE_ENV === "production"
-    ? process.env.FRONTEND_PROD_URL
-    : process.env.FRONTEND_DEV_URL;
+  ENV_VARS.NODE_ENV === "production" ? "/" : ENV_VARS.FRONTEND_DEV_URL;
 
 router.post("/signUp", isNotLoggedIn, signUp, login);
 router.post("/login", isNotLoggedIn, login);

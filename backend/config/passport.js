@@ -1,9 +1,10 @@
 import passport from "passport";
 import google from "../strategies/googleStrategy.js";
 import local from "../strategies/localStrategy.js";
-import User from "../models/user.model.js";
-import Review from "../models/review.model.js";
+import { db } from "./db.js";
 export default () => {
+  const { User, Review } = db.models;
+
   passport.serializeUser((user, done) => {
     done(null, user.id);
   });
