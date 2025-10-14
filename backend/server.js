@@ -27,6 +27,8 @@ db.associate();
 sequelize.sync();
 passportConfig();
 
+app.enable("trust proxy");
+
 app.use(logger("dev"));
 app.use(express.json({ limit: "5mb" }));
 app.use(express.urlencoded({ extended: true }));
@@ -43,9 +45,9 @@ if (ENV_VARS.NODE_ENV === "production") {
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        secure: true,
+        secure: false,
         maxAge: lifeTime,
-        sameSite: "strict",
+        sameSite: "lax",
       },
       store: new RedisStore({ client: redisClient }),
     })
@@ -56,7 +58,12 @@ if (ENV_VARS.NODE_ENV === "production") {
       secret: secret_key,
       resave: false,
       saveUninitialized: false,
-      cookie: { httpOnly: true, secure: false, maxAge: lifeTime },
+      cookie: {
+        httpOnly: true,
+        secure: false,
+        maxAge: lifeTime,
+        sameSite: "lax",
+      },
     })
   );
 }

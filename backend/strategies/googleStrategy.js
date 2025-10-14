@@ -13,13 +13,12 @@ export default () => {
         clientSecret: ENV_VARS.GOOGLE_CLIENT_SECRET,
         callbackURL: "/api/auth/google/callback",
         scope: ["profile", "email"],
-        state: true,
         proxy: true,
+        state: true,
       },
       async (accessToken, refreshToken, profile, done) => {
         // Find or create user in your database
         try {
-          console.log(profile);
           const exUser = await User.findOne({
             where: { email: profile.emails[0].value, provider: "google" },
             include: [
