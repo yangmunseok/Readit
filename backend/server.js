@@ -16,7 +16,6 @@ import { cleanupInterval, cleanupOldUsers } from "./jobs/cleanup.js";
 import authRouter from "./routes/auth.route.js";
 import reviewRouter from "./routes/review.route.js";
 import bookRouter from "./routes/book.route.js";
-import { RedisStore } from "connect-redis";
 
 const app = express();
 const port = ENV_VARS.PORT || 8000;
@@ -35,6 +34,7 @@ app.use(cookieParser(secret_key));
 
 if (ENV_VARS.NODE_ENV === "production") {
   const { connectRedis } = await import("./config/redis.js");
+  const { RedisStore } = await import("connect-redis");
   const redisClient = await connectRedis();
   app.use(
     session({
