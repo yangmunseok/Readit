@@ -45,7 +45,7 @@ if (ENV_VARS.NODE_ENV === "production") {
       saveUninitialized: false,
       cookie: {
         httpOnly: true,
-        secure: false,
+        secure: true,
         maxAge: lifeTime,
         sameSite: "lax",
       },
