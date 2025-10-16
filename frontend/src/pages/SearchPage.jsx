@@ -30,7 +30,6 @@ export const SearchPage = () => {
       try {
         const params = new URLSearchParams(location.search.slice(1));
         const response = await axios.get("/book/srchBooksNaver", { params });
-        console.log(response.data);
         const { items, total } = response.data;
         setBooks(items);
         setTotalPage(Math.floor(total / pageSize));

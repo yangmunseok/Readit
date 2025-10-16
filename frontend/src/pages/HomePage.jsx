@@ -39,14 +39,12 @@ export const HomePage = () => {
         const response = await axios.get("/book/recommendList");
         const result = response.data;
         const data = result.data;
-        console.log(data);
         setRecommendList(data);
         setDialog((prev) => ({
           start: 0,
           max: data.length,
           end: data.length > 6 ? 6 : data.length,
         }));
-        console.log(data);
       } catch (error) {
         console.error(error);
       }

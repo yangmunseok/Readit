@@ -28,7 +28,6 @@ export const ReviewPage = () => {
         rating: review.rating,
         bookId: isbn,
       });
-      console.log(response.data);
       setReviews([...reviews, response.data]);
       setReview({ content: "", rating: 0 });
 
@@ -45,7 +44,6 @@ export const ReviewPage = () => {
     const response = await axios.get(`/book/srchLibByIsbn`, {
       params: { region, dtl_region: regionDtl, isbn },
     });
-    console.log(response.data.libs);
     setAvailableLibs(response.data.libs);
   };
   useEffect(() => {
@@ -53,7 +51,6 @@ export const ReviewPage = () => {
       try {
         const response = await axios.get(`/book/srchBookByIsbnNaver/${isbn}`);
         const data = response.data;
-        console.log(data);
         setBookDetails({
           ...data,
           description: he.decode(data.description),
@@ -74,7 +71,6 @@ export const ReviewPage = () => {
     fetchBookDetails();
     fetchReviews();
   }, []);
-  console.log(bookDetails);
   return (
     <div className="flex flex-col gap-20 font-pretendard text-black bg-white items-center overflow-x-hidden">
       <div className="h-20 w-full  bg-black text-white">
@@ -448,7 +444,6 @@ export const ReviewPage = () => {
           )}
           {availableLibs.length > 0 &&
             availableLibs.map((availableLib) => {
-              console.log(availableLib);
               const lib = availableLib.lib;
               return (
                 <div

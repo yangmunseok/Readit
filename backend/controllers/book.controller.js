@@ -114,6 +114,7 @@ export const searchBookByIsbnNaver = async (req, res) => {
 
     // Remove duplicated data
     updatedSearchHistory = [...new Set(updatedSearchHistory)];
+    console.log("Updated search history:", updatedSearchHistory);
 
     if (updatedSearchHistory.length > 5) {
       updatedSearchHistory = updatedSearchHistory.slice(-5);
